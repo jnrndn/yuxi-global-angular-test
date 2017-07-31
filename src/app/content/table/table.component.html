@@ -1,0 +1,80 @@
+
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <md-input-container floatPlaceholder="never">
+      <input mdInput #filter placeholder="Filter">
+    </md-input-container>
+  </div>
+  <md-table #table [dataSource]="dataSource" mdSort> 
+    <!-- Title Column MyChallenge -->
+    <ng-container cdkColumnDef="title">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Title </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{ row.challengeName }} </md-cell>
+    </ng-container> 
+    
+    <!-- Title Column teamChallenge -->
+    <ng-container cdkColumnDef="titleTC">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Title </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{ row.name }} </md-cell>
+    </ng-container> 
+    
+    <!-- Created By Column MyChallenge -->
+    <ng-container cdkColumnDef="createdBy">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Created By </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.challengerFirstName}} {{ row.challengerLastName }} </md-cell>
+    </ng-container> 
+   
+    <!-- Created By Column teamChallenge -->
+    <ng-container cdkColumnDef="name">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Created By </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.userFullName}} </md-cell>
+    </ng-container> 
+    
+    <!-- average Column MyChallenge -->
+    <ng-container cdkColumnDef="average"  >
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Avg Score </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.overallScore}} </md-cell>
+    </ng-container> 
+    
+    <!-- Invited Column MyChallenge -->
+    <ng-container cdkColumnDef="invited"  >
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Invited </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.modifiedDate | date}} </md-cell>
+    </ng-container> 
+
+    <!-- Invited Column teamChallenge -->
+    <ng-container cdkColumnDef="modified"  >
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Modified </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.modifiedDate | date}} </md-cell>
+    </ng-container> 
+    
+    <!-- Completed Column MyChallenge -->
+    <ng-container cdkColumnDef="completed"  >
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Completed </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.completedDate | date}} </md-cell>
+    </ng-container>
+   
+    <!-- Invited Column teamChallenge -->
+    <ng-container cdkColumnDef="invitedTC"  >
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Invited </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.numberInvited }} </md-cell>
+    </ng-container>
+    
+    <!-- Entries Column teamChallenge -->
+    <ng-container cdkColumnDef="entries"  >
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Entries </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.numberInvited }} </md-cell>
+    </ng-container>
+    
+    <!-- To Review Column teamChallenge -->
+    <ng-container cdkColumnDef="review"  >
+      <md-header-cell *cdkHeaderCellDef md-sort-header> To Review </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.numberToReview }} </md-cell>
+    </ng-container>
+    
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;"
+      style = "cursor: pointer;">
+    </md-row>
+  </md-table>
+</div>  

@@ -1,0 +1,20 @@
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around; align-content: center; padding: 1em">
+    <md-card>
+        <md-card-content>
+            <app-summary [entries]="acum" [invited]="count" ></app-summary>    
+        </md-card-content>
+    </md-card> 
+    <md-card>
+        <md-card-content>
+            <app-summary></app-summary>    
+        </md-card-content>
+    </md-card> 
+</div>
+<md-card>
+    <md-card-content>
+        <md-tab-group>
+            <md-tab label="Team Challenges"><app-table [myChallengeData]="myChallenges" ></app-table></md-tab>
+            <md-tab label="My Challenges"><app-table [teamChallengeData]="teamChallenges" ></app-table></md-tab>  
+        </md-tab-group>
+    </md-card-content>
+</md-card> 

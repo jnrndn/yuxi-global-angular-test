@@ -1,0 +1,19 @@
+<div style="display: flex; align-items:baseline">
+  <div style="padding: 1em;">
+    <div style="width:100px">
+      <span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, quo, nihil. Minima quia illo neque maxime temporibus, cupiditate ipsam itaque illum. Omnis aut quis, minima natus delectus doloribus inventore voluptates.</span>
+    </div>
+  </div>
+  <hr width="1" size="350">
+  <div >
+    <div style="width: 450px">
+      <canvas baseChart
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [chartType]="doughnutChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+</div>
+  
