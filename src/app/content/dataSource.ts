@@ -1,4 +1,3 @@
-import { MyChallenge } from './../models/MyChallenge.model';
 import { DataSource } from '@angular/cdk';
 import { MdSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
@@ -16,13 +15,19 @@ export class ExampleDataSource extends DataSource<any> {
   }
 
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<MyChallenge[]> {
+  connect(): Observable<any[]> {
     const displayDataChanges = [
       this._exampleDatabase,
       this._sort.mdSortChange
     ];
 
      return Observable.merge(...displayDataChanges).map(() => {
+      // const data = this._exampleDatabase.slice();
+      
+      //       // Grab the page's slice of data.
+      //       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+      //       return data.splice(startIndex, this._paginator.pageSize);
+
       return this.getSortedData();
     });
   }
@@ -30,21 +35,26 @@ export class ExampleDataSource extends DataSource<any> {
   disconnect() {}
 
   /** Returns a sorted copy of the database data. */
-  getSortedData(sort?): MyChallenge[] {
+  getSortedData(sort?): any[] {
     const data = this._exampleDatabase.value;
     const sortTable = sort || this._sort
     if (!sortTable.active || sortTable.direction === '') { return data; }
-    console.log(sortTable)
     return data.sort((a, b) => {
       let propertyA: number|string = '';
       let propertyB: number|string = '';
 
       switch (sortTable.active) {
         case 'title': [propertyA, propertyB] = [a.challengeName, b.challengeName]; break;
-        // case 'average': [propertyA, propertyB] = [a.average, b.average]; break;
-        // case 'photo': [propertyA, propertyB] = [a.photo, b.photo]; break;
-        // case 'homeworkCompleted': [propertyA, propertyB] = [a.homeworkCompleted, b.homeworkCompleted]; break;
-        // case 'homeworkMissing': [propertyA, propertyB] = [a.homeworkMissing, b.homeworkMissing]; break;
+        case 'titleTC': [propertyA, propertyB] = [a.name, b.name]; break;
+        case 'average': [propertyA, propertyB] = [a.overallScore, b.overallScore]; break;
+        case 'invited': [propertyA, propertyB] = [a.modifiedDate, b.modifiedDate]; break;
+        case 'completed': [propertyA, propertyB] = [a.completedDate, b.completedDate]; break;
+        case 'modified': [propertyA, propertyB] = [a.modifiedDate, b.modifiedDate]; break;
+        case 'invitedTC': [propertyA, propertyB] = [a.numberInvited, b.numberInvited]; break;
+        case 'entries': [propertyA, propertyB] = [a.numberInvited, b.numberInvited]; break;
+        case 'review': [propertyA, propertyB] = [a.numberToReview, b.numberToReview]; break;
+        case 'createdBy': [propertyA, propertyB] = [a.challengerFirstName, b.challengerFirstName]; break;
+        case 'name': [propertyA, propertyB] = [a.userFullName, b.userFullName]; break;
       }
 
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
@@ -54,7 +64,7 @@ export class ExampleDataSource extends DataSource<any> {
     });
   }
 
-  addData(newChallenge: MyChallenge): ExampleDataSource {
+  addData(newChallenge): ExampleDataSource {
    return new  ExampleDataSource(this._exampleDatabase.push(newChallenge), this._sort);
   }
 }

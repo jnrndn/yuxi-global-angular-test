@@ -13,17 +13,17 @@ export class ContetService {
   teamChallengesURL:string = 'api/TeamChallenges';
 
   private headers = new Headers({ 'Content-type': 'application/json' });
-  constructor( private htttp: Http) { }   
+  constructor( private http: Http) { }   
 
   getMyChallenges(): Observable<Response>{
-    return this.htttp.get(this.myChallengesURL)
+    return this.http.get(this.myChallengesURL)
       .map((challenges: Response) => challenges.json().data)
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
       
   }
 
   getTeamChallenges(): Observable<Response>{
-    return this.htttp.get(this.teamChallengesURL)
+    return this.http.get(this.teamChallengesURL)
       .map((challenge: Response) => challenge.json().data)
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }

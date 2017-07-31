@@ -18,27 +18,29 @@ import { TeamChallenge } from "./../models/TeamChallenges.model";
 })
 export class ContentComponent implements OnInit {
 
-
-  dataChange: BehaviorSubject<MyChallenge[]> = new BehaviorSubject<MyChallenge[]>([]);
   result;
   response;
-  entries = 0;
+  fullName: string;
+  entries: number[];
+  completed: number[];
   acum = 0;
   count = 0;
+  toComplete:number = 0;
 
   myChallenges: ExampleDataSource;
   teamChallenges: ExampleDataSource;
   dataSource: ExampleDataSource | null;
 
   @ViewChild(MdSort) sort;
+  
 
   constructor(private contetService: ContetService) { }
 
   ngOnInit() {
     this.getMyChallenges();
-    // this.getTeamChallenge();
-    // this.getNumberOfEntries();
-
+    this.getTeamChallenge();  
+    this.getNumberOfEntries();
+    this.getMyChallengesCompletedDate();
   }
 
 
@@ -47,11 +49,9 @@ export class ContentComponent implements OnInit {
       .subscribe(response => {
         this.result = response;
         this.result.forEach(element => {
-          this.dataChange.next(element.results);
-          this.myChallenges = new ExampleDataSource(this.dataChange, this.sort);
-        })
-        this.dataSource = this.myChallenges;
-      })
+          this.myChallenges = element.results;
+        });
+      });
   }
 
   getTeamChallenge(){
@@ -59,29 +59,47 @@ export class ContentComponent implements OnInit {
     .subscribe(respones =>{
       this.result = respones;
       this.result.forEach(element => {
-        this.dataChange.next(element.results);
-        this.teamChallenges = new ExampleDataSource(this.dataChange, this.sort);
+        this.teamChallenges = element.results;
       });
-      console.log('ahi va la data teamChallenge', this.teamChallenges);
     });
   }
 
   getNumberOfEntries(){
     this.contetService.getTeamChallenges()
       .subscribe(response => {
+        this.acum = 0;
+        this.count = 0;
         this.response = response
         this.response.forEach(element => {
           this.result = element.results;
           this.result.forEach(element => {
-            this.count += element.numberInvited
-            if(element.numberInvited != element.numberOfEntries){
-              this.acum += element.numberInvited - element.numberOfEntries;
+            this.fullName = element.userFullName;
+            if(element.numberOfEntries !== 0){
+              this.acum += element.numberOfEntries;
+            }else{
+              this.count++; 
             }
           });
         });
-        console.log(this.acum, this.count);
+        this.entries = [this.acum, this.count];
       });
-      
+  }
+
+  getMyChallengesCompletedDate(){
+    this.contetService.getMyChallenges()
+    .subscribe(response =>{
+      this.acum = 0;
+      this.count = 0;
+      response[0].results.forEach(element => {
+        this.acum += element.overallScore;
+        if(element.completedDate){
+          this.count++;
+        }else{
+          this.toComplete++;
+        }
+      });
+      this.completed = [this.acum, this.count, this.toComplete];
+    });
   }
 
 }

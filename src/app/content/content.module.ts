@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from "@angular/http";
 import { SummaryComponent } from './summary/summary.component';
 import { TableComponent } from './table/table.component';
-import { MdTableModule, MdInputModule, MdCardModule, MdSortModule, MdTabsModule, MdIconModule } from '@angular/material';
+import { MdTableModule, MdInputModule, MdCardModule, MdSortModule, MdTabsModule, MdIconModule, MdPaginatorModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk';
 import { ChartsModule } from 'ng2-charts';
 
@@ -21,13 +21,14 @@ import { ChartsModule } from 'ng2-charts';
     MdSortModule,
     CdkTableModule,
     MdTabsModule,
+    MdPaginatorModule,
     MdIconModule,
     ChartsModule
   ],
   declarations:[
     ContentComponent,
     SummaryComponent,
-    TableComponent
+    TableComponent 
   ],
   providers:[ContetService],
   exports:[ContentComponent]
