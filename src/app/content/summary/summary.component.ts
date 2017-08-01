@@ -36,7 +36,7 @@ export class SummaryComponent implements OnInit {
     if(this.invited){
       this.name = this.fullName.split(' ');
       this.lineChartColors = [{backgroundColor:['orange','green']}];
-      this.doughnutChartLabels = ['Entries', 'Invided'];
+      this.doughnutChartLabels = ['To Review', 'Reviwed'];
       this.doughnutChartData = [this.entries[0], this.entries[1]];
       this.toReview =  this.entries[0] - this.entries[1];
       
