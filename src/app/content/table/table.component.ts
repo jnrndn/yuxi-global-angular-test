@@ -1,8 +1,9 @@
 import { DataSource } from '@angular/cdk';
 import { MdSort, MdPaginator } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Rx';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ExampleDataSource } from './../dataSource';
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class TableComponent implements OnInit {
   displayedColumns: string[];
 
   @ViewChild(MdSort) sort: MdSort;
-  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild('filter') filter: ElementRef;
   @Input()challenges: any;
   @Input()table:boolean;
 
@@ -26,13 +27,24 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.dataChange.next(this.challenges)
     this.dataSource = new ExampleDataSource(this.dataChange, this.sort)
-    // console.log(this.dataSource);
-    
+        
     if(this.table){
       this.displayedColumns = ['title', 'createdBy', 'average', 'invited', 'completed'];
     }
     else {
       this.displayedColumns= ['titleTC', 'name', 'modified', 'invitedTC', 'entries', 'review', 'button'];
     }
+
+    this.listenerFilter()
+  }
+
+  listenerFilter(): void {
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) { return; }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      });
   }
 }

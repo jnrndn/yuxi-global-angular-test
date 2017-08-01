@@ -18,18 +18,23 @@ export class ExampleDataSource extends DataSource<any> {
   connect(): Observable<any[]> {
     const displayDataChanges = [
       this._exampleDatabase,
-      this._sort.mdSortChange
+      this._sort.mdSortChange,
+      this._filterChange,
     ];
 
      return Observable.merge(...displayDataChanges).map(() => {
-      // const data = this._exampleDatabase.slice();
-      
-      //       // Grab the page's slice of data.
-      //       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-      //       return data.splice(startIndex, this._paginator.pageSize);
-
-      return this.getSortedData();
-    });
+      return this.getSortedData()
+        .filter(item =>{
+          if(item.name){
+            const searchString = item.name.toLowerCase();
+            return searchString.indexOf(this.filter.toLowerCase()) !== -1;
+            }
+          if(item.challengeName){
+            const searchString = item.challengeName.toLowerCase();
+            return searchString.indexOf(this.filter.toLowerCase()) !== -1;
+          }
+        });      
+      });
   }
 
   disconnect() {}

@@ -1,5 +1,12 @@
 # Yuxi Global - Angular Test
 
+## Adicional dependencies
+
+**Angular Material**: for app style and display data into tables
+**ng2-charts**: Used for doughnut chart 
+**angular-in-memory-web-api**: to simulate http responses
+
+
 ## 1. Introduction
 
 In this test you will be asked to build a set of functionalities in Angular. You will be provided a set of **mockups** and a **base project** we have already setup for you in this repository. 

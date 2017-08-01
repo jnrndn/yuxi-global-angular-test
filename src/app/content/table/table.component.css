@@ -3,18 +3,24 @@
 }
 
 .yellowbox{
-    flex: 0 0 75;
     background-color: #ffa500;
     border: 1px solid #fd7a16;
     border-radius: 2px;
     color: white;
-    width: 10px important!;
-}
-
-.expand{
-    flex: 0 0 450px;
 }
 
 .btn{
     text-align: center;
+}
+
+.review{
+    padding: 5px 8px 5px 8px;
+}
+
+.font{
+    font-size: 13px;
+}
+
+.adjust{
+    display: block;
 }

@@ -1,4 +1,4 @@
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around; align-content: center; padding: 2em">
+<div class="container">
     <div *ngIf="entries">
         <md-card>
             <md-card-content>
@@ -15,6 +15,8 @@
     </div>
 </div>
 <md-card>
+    <div *ngIf="toComplete" class="completed" >To Be Completed: <span [class.yellowbox]="toComplete != 0"> {{ toComplete }} </span></div>
+    <button md-raised-button class="btn" >New Challenge</button>
     <md-card-content>
         <md-tab-group>
             <div *ngIf="teamChallenges">

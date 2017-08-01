@@ -77,29 +77,24 @@
     <ng-container cdkColumnDef="review"  >
       <md-header-cell *cdkHeaderCellDef md-sort-header> To Review </md-header-cell>
       <md-cell *cdkCellDef="let row" >
-        <div [class.yellowbox]="row.numberToReview != 0"> 
-            {{row.numberToReview != 0 ? row.numberToReview: '-' }} 
+        <div> 
+            <span [class.yellowbox]="row.numberToReview != 0" class="review">{{row.numberToReview != 0 ? row.numberToReview: '-' }}</span>
         </div>
       </md-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="button" class="btn" >
-      <md-header-cell *cdkHeaderCellDef md-sort-header> Actions </md-header-cell>
+      <md-header-cell *cdkHeaderCellDef > Actions </md-header-cell>
       <md-cell *cdkCellDef="let row">
           <button md-button [mdMenuTriggerFor]="menu"> <md-icon>more_horiz</md-icon> </button>
           <md-menu #menu="mdMenu" yPosition="below" [overlapTrigger]="false">
-              <button md-menu-item class="blue"> <md-icon>trending_up</md-icon> View Leaderboard</button>
-              <button md-menu-item class="blue"> <md-icon>mail</md-icon> Send Participant Reminder</button>
-              <button md-menu-item class="blue"> <md-icon>mail</md-icon> Send Reviwer Reminder</button>
-              <button md-menu-item class="blue"> <md-icon>content_copy</md-icon> Copy Challenge</button>
-              <button md-menu-item class="blue"> <md-icon>edit</md-icon> Edit Profile</button>
-              <button md-menu-item class="blue"> <md-icon>delete</md-icon> Delete Challenge</button>
-              
-              <md-checkbox style="display: flex"> 
-                  <div  md-menu-item class="blue">Email me when an entry is submitted</div> 
-              </md-checkbox>
-              
-
+              <button md-menu-item class="blue font"> <md-icon>trending_up</md-icon> View Leaderboard</button>
+              <button md-menu-item class="blue font"> <md-icon>mail</md-icon> Send Participant Reminder</button>
+              <button md-menu-item class="blue font"> <md-icon>mail</md-icon> Send Reviwer Reminder</button>
+              <button md-menu-item class="blue font"> <md-icon>content_copy</md-icon> Copy Challenge</button>
+              <button md-menu-item class="blue font"> <md-icon>edit</md-icon> Edit Profile</button>
+              <button md-menu-item class="blue font"> <md-icon>delete</md-icon> Delete Challenge</button>
+              <button md-menu-item class="blue font adjust"> <md-checkbox></md-checkbox>Email me when an entry is submitted</button>
           </md-menu>
         </md-cell>
     </ng-container>
@@ -109,11 +104,4 @@
       style = "cursor: pointer;">
     </md-row>
   </md-table>
-
-   <md-paginator #paginator
-      [length]="48"
-      [pageIndex]="0"
-      [pageSize]="10">
-  </md-paginator> 
-
 </div>  
