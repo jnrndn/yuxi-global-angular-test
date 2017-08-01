@@ -32,7 +32,7 @@ export class TableComponent implements OnInit {
       this.displayedColumns = ['title', 'createdBy', 'average', 'invited', 'completed'];
     }
     else {
-      this.displayedColumns= ['titleTC', 'name', 'modified', 'invitedTC', 'entries', 'review'];
+      this.displayedColumns= ['titleTC', 'name', 'modified', 'invitedTC', 'entries', 'review', 'button'];
     }
   }
 }

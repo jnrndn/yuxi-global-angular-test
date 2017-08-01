@@ -48,12 +48,4 @@ export class SummaryComponent implements OnInit {
       this.doughnutChartData = [ this.entries[1], this.entries[2] ];
     }
   }
-
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
 }
